@@ -5,17 +5,24 @@ let button = document.getElementById('add');
 let table = document.getElementById('table');
 let total = document.getElementById('total');
 
-function addItem(){
-	let item = itemInput.value;
-	let price = priceInput.value;
+let priceArr = [];
+function addItem() {
+  let item = itemInput.value;
+  let price = priceInput.value;
+  let sum = 0;
 
-	if(input!== " " && price!== " ")
-	   {
-			let row = document.createElement('tr');
-		   row.innerHTML = `<td>${item}</td> <td>${price}</td>`
-		   table.append(row);
-		   
-	   }
+  if (item !== " " && price !== " ") {
+    let row = document.createElement('tr');
+    priceArr.push(parseInt(price));
+    row.innerHTML = `<td>${item}</td> <td>${price}</td>`
+    for(let i=0;i<priceArr.length;i++){
+      sum+=priceArr[i];
+    }
+    table.append(row);
+    total.innerText = sum;
+    itemInput.value='';
+    priceInput.value='';
+  }
 }
 
-button.addEventListener('click',addItem)
+button.addEventListener('click', addItem);
